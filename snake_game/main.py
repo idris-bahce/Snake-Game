@@ -31,9 +31,14 @@ while game_is_on:
         scoreboard.increase_score()
         snake.extend()
 
-    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_is_on = False
-        scoreboard.game_over()
+    if snake.head.xcor() > 280 or snake.head.xcor() < -280:
+        new_x = -(snake.head.xcor())
+        new_y = snake.head.ycor()
+        snake.head.goto(new_x, new_y)
+    elif snake.head.ycor() > 280 or snake.head.ycor() < -280:
+        new_x = snake.head.xcor()
+        new_y = -(snake.head.ycor())
+        snake.head.goto(new_x, new_y)
 
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
